@@ -15,7 +15,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products=Product::with(['category','ratings','activities','images','reservations','promotions'])->get();
+        $products = Product::with(['category', 'ratings', 'activities', 'images', 'reservations', 'promotions'])->get();
         return ProductResource::collection($products);
     }
 
@@ -33,7 +33,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        $product->load(['category','ratings','activities','images','reservations','promotions']);
+        $product->load(['category', 'ratings', 'activities', 'images', 'reservations', 'promotions']);
         return new ProductResource($product);
     }
 
@@ -53,5 +53,30 @@ class ProductController extends Controller
     {
         $product->delete();
         return response()->json(['message' => 'Producto eliminado correctamente'], 200);
+    }
+    public function uploadImagenes(Request $request, Product $product)
+    {
+        $request->validate([
+            'images.*' => 'required|image|max:5120', // Máx 5MB por imagen
+        ]);
+
+        foreach ($request->file('images') as $image) {
+            $path = $image->store('products', 'public');
+            $product->images()->create(['url' => '/storage/' . $path]);
+        }
+
+        return response()->json(['message' => 'Imágenes subidas correctamente'], 200);
+    }
+
+    public function uploadFile(Request $request, Product $product)
+    {
+        $request->validate([
+            'file' => 'required|file|mimes:pdf,doc,docx,xls,xlsx,csv,ppt,pptx,txt,zip|max:10240',
+        ]);
+
+        $path = $request->file('file')->store('brochures', 'public');
+        $product->update(['file' => '/storage/' . $path]);
+
+        return response()->json(['message' => 'Archivo cargado correctamente', 'path' => '/storage/' . $path], 200);
     }
 }

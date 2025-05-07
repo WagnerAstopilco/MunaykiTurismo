@@ -42,10 +42,15 @@ class Product extends Model
     }
     public function reservations()
     {
-        return $this->belongsToMany(Reservation::class, 'product_reservation'); 
+        return $this->belongsToMany(Reservation::class, 'product_reservation');
     }
     public function promotions()
     {
         return $this->belongsToMany(Promotion::class, 'product_promotion');
     }
+    public function destino()
+{
+    return $this->belongsTo(Destino::class);
+}
+
 }

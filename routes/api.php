@@ -12,7 +12,7 @@ use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\RatingController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\UserController;
-
+use App\Http\Controllers\DestinoController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -33,8 +33,15 @@ Route::apiResource('/categories', CategoryController::class);
 Route::apiResource('/coupons', CouponController::class);
 Route::apiResource('/images', ImageController::class);
 Route::apiResource('/payments', PaymentController::class);
-Route::apiResource('/products', ProductController::class);
+
+Route::apiResource('/productos', ProductController::class);
+Route::post('/productos/{id}/imagenes', [ProductController::class, 'uploadImagenes']);
+Route::post('/productos/{id}/file', [ProductController::class, 'uploadFile']);
+
+
+
 Route::apiResource('/promotions', PromotionController::class);
 Route::apiResource('/ratings', RatingController::class);
 Route::apiResource('/reservations', ReservationController::class);
 Route::apiResource('/users', UserController::class);
+Route::apiResource('destinos', DestinoController::class);
