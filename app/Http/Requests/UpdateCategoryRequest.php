@@ -22,9 +22,12 @@ class UpdateCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'sometimes|required|string|min:3|max:255',
+            'name' => 'sometimes|required|string|min:3|max:255|unique:categories,name,' . $this->category->id,
+            'slug' => 'sometimes|required|string|min:3|max:255|regex:/^[a-z0-9-]+$/|unique:categories,slug,' . $this->category->id,
             'description' => 'sometimes|nullable|string|max:1000',
             'parent_id' => 'sometimes|nullable|exists:categories,id',
+            'visible_in_main_web' => 'sometimes|boolean',
+
         ];
     }
     public function attributes()
@@ -33,6 +36,7 @@ class UpdateCategoryRequest extends FormRequest
             'name' => 'nombre',
             'description' => 'descripción',
             'parent_id' => 'categoría padre',
+            'visible_in_main_web' => 'visible en la web principal',
         ];
     }
     public function messages()

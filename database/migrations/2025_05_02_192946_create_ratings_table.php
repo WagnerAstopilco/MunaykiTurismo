@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('product_id')->constrained('products')->onDelete('cascade');
             $table->integer('value')->default(0);
             $table->string('comment')->nullable();
+            $table->boolean('visible_in_main_web')->default(true);
             $table->timestamps();
         });
     }

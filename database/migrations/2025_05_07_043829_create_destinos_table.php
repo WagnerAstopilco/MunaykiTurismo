@@ -13,8 +13,11 @@ return new class extends Migration
     {
         Schema::create('destinos', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('place');
+            $table->string('country')->unique();
             $table->text('description')->nullable();
+            $table->boolean('visible_in_main_web')->nullable()->default(0);
+            $table->foreignId('image_id')->nullable()->constrained('images')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreCategoryRequest extends FormRequest
+class StoreDestinoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,30 +22,34 @@ class StoreCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|min:3|max:255||unique:categories,name',
-            'slug' => 'required|string|min:3|max:255|unique:categories,slug|regex:/^[a-z0-9-]+$/',
+            'place' => 'required|string|min:3|max:255',
+            'country' => 'required|string|min:3|max:255|unique:destinos,country',
             'description' => 'nullable|string|max:1000',
-            'parent_id' => 'nullable|exists:categories,id',
             'visible_in_main_web' => 'nullable|boolean',
+            'image_id' => 'nullable|exists:images,id',
         ];
     }
     public function attributes()
     {
         return [
-            'name' => 'nombre',
+            'place' => 'lugar',
+            'country' => 'país',
             'description' => 'descripción',
-            'parent_id' => 'categoría padre',
             'visible_in_main_web' => 'visible en la web principal',
+            'image_id' => 'imagen',
         ];
     }
     public function messages()
     {
         return [
-            'name.required' => 'El :attribute es obligatorio.',
-            'name.min' => 'El :attribute debe tener al menos :min caracteres.',
-            'name.max' => 'El :attribute no puede tener más de :max caracteres.',
+            'place.required' => 'El :attribute es obligatorio.',
+            'place.min' => 'El :attribute debe tener al menos :min caracteres.',
+            'place.max' => 'El :attribute no puede tener más de :max caracteres.',
+            'country.required' => 'El :attribute es obligatorio.',
+            'country.min' => 'El :attribute debe tener al menos :min caracteres.',
+            'country.max' => 'El :attribute no puede tener más de :max caracteres.',
             'description.max' => 'La :attribute no puede tener más de :max caracteres.',
-            'parent_id.exists' => 'La :attribute no es válida.',
+            'image_id.exists' => 'La :attribute seleccionada no es válida.',
         ];
     }
 }

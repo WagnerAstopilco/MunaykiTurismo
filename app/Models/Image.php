@@ -20,4 +20,8 @@ class Image extends Model
     {
         return $this->belongsToMany(Product::class, 'image_product');
     }
+    public function destino()
+    {
+        return $this->belongsTo(Destino::class);
+    }
 }

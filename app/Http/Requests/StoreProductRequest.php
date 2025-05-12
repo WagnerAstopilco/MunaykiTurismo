@@ -22,7 +22,8 @@ class StoreProductRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|min:3|max:255',
+            'name' => 'required|string|min:3|max:255|unique:products,name',
+            'slug' => 'required|string|min:3|max:255|unique:products,slug|regex:/^[a-z0-9-]+$/',
             'description' => 'nullable|string|max:1000',
             'category_id' => 'required|exists:categories,id',
             'price_PEN' => 'required|numeric|gte:0',
@@ -32,6 +33,11 @@ class StoreProductRequest extends FormRequest
             'number_of_nights' => 'nullable|integer|min:1',
             'number_of_people' => 'nullable|integer|min:1',
             'file' => 'nullable|file|mimes:pdf,doc,docx,,xls,xlsx,csv,ppt,pptx,txt,zip',
+            'itinerary' => 'nullable|string|max:1000',
+            'reservation_requirements' => 'nullable|string|max:1000',
+            'reservation_included' => 'nullable|string|max:1000',
+            'destino_id' => 'required|exists:destinos,id',
+            'visible_in_main_web' => 'nullable|boolean',
         ];
     }
     public function attributes()
@@ -47,6 +53,11 @@ class StoreProductRequest extends FormRequest
             'number_of_nights' => 'número de noches',
             'number_of_people' => 'número de personas',
             'file' => 'archivo',
+            'itinerary' => 'itinerario',
+            'reservation_requirements' => 'requisitos de reserva',
+            'reservation_included' => 'lo que incluye la reserva',
+            'destino_id' => 'destino',
+            'visible_in_main_web' => 'visible en la web principal',
         ];
     }
     public function messages()

@@ -13,6 +13,7 @@ class Product extends Model
 
     protected $fillable = [
         'name',
+        'slug',
         'description',
         'category_id',
         'price_PEN',
@@ -22,6 +23,11 @@ class Product extends Model
         'number_of_nights',
         'number_of_people',
         'file',
+        'itinerary',
+        'reservation_requirements',
+        'reservation_included',
+        'destino_id',
+        'visible_in_main_web',
     ];
 
     public function category()
@@ -49,8 +55,12 @@ class Product extends Model
         return $this->belongsToMany(Promotion::class, 'product_promotion');
     }
     public function destino()
-{
-    return $this->belongsTo(Destino::class);
-}
+    {
+        return $this->belongsTo(Destino::class);
+    }
+    public function coupons()
+    {
+        return $this->belongsToMany(Coupon::class, 'coupon_product');
+    }
 
 }

@@ -11,6 +11,7 @@ class Coupon extends Model
     protected $table = 'coupons';
 
     protected $fillable = [
+        'name',
         'code',
         'description',
         'discount_percentage',
@@ -23,5 +24,9 @@ class Coupon extends Model
     public function Payments()
     {
         return $this->belongsToMany(Payment::class,'coupon_payment');
+    }
+    public function Products()
+    {
+        return $this->belongsToMany(Product::class,'coupon_product');
     }
 }

@@ -13,8 +13,10 @@ class Rating extends Model
 
     protected $fillable = [
         'user_id',
+        'product_id',
         'value',
         'comment',
+        'visible_in_main_web',
     ];
 
     public function product()

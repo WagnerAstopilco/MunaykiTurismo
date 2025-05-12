@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CouponResource extends JsonResource
+class DestinoResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,18 +16,16 @@ class CouponResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'name' => $this->name,
-            'code' => $this->code,
+            'place' => $this->place,
+            'country' => $this->country,
             'description' => $this->description,
-            'discount_percentage' => $this->discount_percentage,
-            'max_uses' => $this->max_uses,
-            'uses_count' => $this->uses_count,
-            'valid_from' => $this->valid_from,
-            'valid_to' => $this->valid_to,
+            'visible_in_main_web' => $this->view_in_main_web,
+            'image_id' => $this->image_id,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
 
-            'payments' => PaymentResource::collection($this->whenLoaded('Payments')),
+            'productos' => ProductResource::collection($this->whenLoaded('productos')),
+            'image' => new ImageResource($this->whenLoaded('image')),
         ];
     }
 }

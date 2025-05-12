@@ -17,6 +17,7 @@ class ProductResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'slug' => $this->slug,
             'description' => $this->description,
             'category_id' => $this->category_id,
             'price_PEN' => $this->price_PEN,
@@ -26,6 +27,11 @@ class ProductResource extends JsonResource
             'number_of_nights' => $this->number_of_nights,
             'number_of_people' => $this->number_of_people,
             'file' => $this->file,
+            'itinerary' => $this->itinerary,
+            'reservation_requirements' => $this->reservation_requirements,
+            'reservation_included' => $this->reservation_included,
+            'destino_id' => $this->destino_id,
+            'visible_in_main_web' => $this->visible_in_main_web,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
 
@@ -35,6 +41,8 @@ class ProductResource extends JsonResource
             'images' => ImageResource::collection($this->whenLoaded('images')),
             'reservations' => ReservationResource::collection($this->whenLoaded('reservations')),
             'promotions' => PromotionResource::collection($this->whenLoaded('promotions')),
+            'destino' => new DestinoResource($this->whenLoaded('destino')),
+            'coupons' => CouponResource::collection($this->whenLoaded('coupons')),
         ];
     }
 }

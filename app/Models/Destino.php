@@ -8,10 +8,20 @@ class Destino extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'description'];
+    protected $fillable = [
+        'place', 
+        'country',
+        'description',
+        'visible_in_main_web',
+        'image_id',
+    ];
 
     public function productos()
     {
         return $this->hasMany(Product::class);
+    }
+    public function image()
+    {
+        return $this->hasOne(Image::class);
     }
 }
