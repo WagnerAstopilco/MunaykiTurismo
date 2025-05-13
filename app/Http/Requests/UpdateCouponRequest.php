@@ -23,13 +23,17 @@ class UpdateCouponRequest extends FormRequest
     {
         return [
             'name' => 'sometimes|required|string|max:255',
-            'code' => 'sometimes|required|string|min:3|max:255|unique:coupons,code',
+            'code' => 'sometimes|required|string|min:3|max:255|unique:coupons,code,'. $this->coupon->id,
             'description' => 'sometimes|nullable|string|max:1000',
             'discount_percentage' => 'sometimes|nullable|numeric|between:0,100',
             'max_uses' => 'sometimes|nullable|numeric|min:1',
             'uses_count' => 'sometimes|nullable|numeric|min:0',
             'valid_from' => 'sometimes|nullable|date',
             'valid_to' => 'sometimes|nullable|date|after_or_equal:valid_from',
+
+            'product_ids' => 'sometimes|nullable|array',
+            'product_ids.*' => 'sometimes|exists:products,id',
+            
         ];
     }
     public function attributes()

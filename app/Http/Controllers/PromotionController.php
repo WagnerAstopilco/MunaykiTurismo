@@ -6,6 +6,7 @@ use App\Models\Promotion;
 use App\Http\Requests\StorePromotionRequest;
 use App\Http\Requests\UpdatePromotionRequest;
 use App\Http\Resources\PromotionResource;
+use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 
 class PromotionController extends Controller
@@ -24,7 +25,12 @@ class PromotionController extends Controller
      */
     public function store(StorePromotionRequest $request)
     {
-        $promotion = Promotion::create($request->validated());
+        $validatedData = $request->validated();
+
+        $promotion = Promotion::create(Arr::except($validatedData, 'product_ids'));
+
+        $promotion->products()->attach($validatedData['product_ids']);
+
         return new PromotionResource($promotion);
     }
 
@@ -42,7 +48,12 @@ class PromotionController extends Controller
      */
     public function update(UpdatePromotionRequest $request, Promotion $promotion)
     {
-        $promotion->update($request->validated());
+        $validatedData = $request->validated();
+
+        $promotion->update(Arr::except($validatedData, 'product_ids'));
+
+        $promotion->products()->syncWithoutDetaching($validatedData['product_ids']);
+
         return new PromotionResource($promotion);
     }
 

@@ -27,6 +27,9 @@ class StorePromotionRequest extends FormRequest
             'discount_percentage' => 'required|integer|between:0,100',
             'valid_from' => 'nullable|date',
             'valid_to' => 'nullable|date|after_or_equal:valid_from',
+
+            'product_ids' => 'nullable|array',
+            'product_ids.*' => 'exists:products,id',
         ];
     }
     public function attributes()

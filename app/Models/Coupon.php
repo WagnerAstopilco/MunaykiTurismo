@@ -21,11 +21,11 @@ class Coupon extends Model
         'valid_to',
     ];
 
-    public function Payments()
+    public function payments()
     {
         return $this->belongsToMany(Payment::class,'coupon_payment');
     }
-    public function Products()
+    public function products()
     {
         return $this->belongsToMany(Product::class,'coupon_product');
     }

@@ -27,6 +27,8 @@ class UpdatePromotionRequest extends FormRequest
             'discount_percentage' => 'sometimes|required|integer|between:0,100',
             'valid_from' => 'sometimes|nullable|date',
             'valid_to' => 'sometimes|nullable|date|after_or_equal:valid_from',
+            'product_ids' => 'sometimes|nullable|array',
+            'product_ids.*' => 'sometimes|exists:products,id',
         ];
     }
     public function attributes()

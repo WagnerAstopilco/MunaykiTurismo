@@ -30,6 +30,9 @@ class StoreCouponRequest extends FormRequest
             'uses_count' => 'nullable|numeric|min:0',
             'valid_from' => 'nullable|date',
             'valid_to' => 'nullable|date|after_or_equal:valid_from',
+
+            'product_ids' => 'nullable|array',
+            'product_ids.*' => 'exists:products,id',
         ];
     }
     public function attributes()

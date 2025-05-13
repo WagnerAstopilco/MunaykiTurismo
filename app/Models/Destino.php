@@ -19,7 +19,7 @@ class Destino extends Model
     'visible_in_main_web' => 'boolean',
 ];
 
-    public function productos()
+    public function products()
     {
         return $this->hasMany(Product::class);
     }

@@ -6,7 +6,7 @@ use App\Models\Coupon;
 use App\Http\Requests\StoreCouponRequest;
 use App\Http\Requests\UpdateCouponRequest;
 use App\Http\Resources\CouponResource;
-
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 
@@ -17,7 +17,7 @@ class CouponController extends Controller
      */
     public function index()
     {
-        $coupons=Coupon::with('payments')->get();
+        $coupons = Coupon::with('payments')->get();
         return CouponResource::collection($coupons);
     }
 
@@ -26,8 +26,12 @@ class CouponController extends Controller
      */
     public function store(StoreCouponRequest $request)
     {
+        $validatedData = $request->validated();
 
-        $coupon = Coupon::create($request->validated());
+        $coupon = Coupon::create(Arr::except($validatedData, 'product_ids'));
+
+        $coupon->products()->attach($validatedData['product_ids']);
+
         return new CouponResource($coupon);
     }
 
@@ -45,8 +49,12 @@ class CouponController extends Controller
      */
     public function update(UpdateCouponRequest $request, Coupon $coupon)
     {
-        Log::info('Datos crudos recibidos en update:', $request->all());
-        $coupon->update($request->validated());
+        $validatedData = $request->validated();
+
+        $coupon->update(Arr::except($validatedData, 'product_ids'));
+
+        $coupon->products()->syncWithoutDetaching($validatedData['product_ids']);
+
         return new CouponResource($coupon);
     }
 
