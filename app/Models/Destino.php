@@ -15,6 +15,9 @@ class Destino extends Model
         'visible_in_main_web',
         'image_id',
     ];
+    protected $casts = [
+    'visible_in_main_web' => 'boolean',
+];
 
     public function productos()
     {
@@ -22,6 +25,6 @@ class Destino extends Model
     }
     public function image()
     {
-        return $this->hasOne(Image::class);
+        return $this->belongsTo(Image::class);
     }
 }

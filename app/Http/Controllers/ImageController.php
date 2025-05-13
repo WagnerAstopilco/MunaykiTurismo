@@ -6,6 +6,7 @@ use App\Models\Image;
 use App\Http\Requests\StoreImageRequest;
 use App\Http\Requests\UpdateImageRequest;
 use App\Http\Resources\ImageResource;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
 class ImageController extends Controller
@@ -24,7 +25,14 @@ class ImageController extends Controller
      */
     public function store(StoreImageRequest $request)
     {
-        $image = Image::create($request->validated());
+        $validatedData = $request->validated();
+
+        if ($request->hasFile('url')) {
+            $path = $request->file('url')->store('imagenes', 'public');
+            $validatedData['url'] = $path;
+        }
+
+        $image = Image::create($validatedData);
         return new ImageResource($image);
     }
 
@@ -42,7 +50,19 @@ class ImageController extends Controller
      */
     public function update(UpdateImageRequest $request, Image $image)
     {
-        $image->update($request->validated());
+        $validatedData = $request->validated();
+        
+        if ($request->hasFile('url')) {
+            if ($image->url) {
+                Storage::disk('public')->delete($image->url);
+            }
+            $path = $request->file('url')->store('imagenes', 'public');
+            $validatedData['url'] = $path;
+        } else {
+            $validatedData['url'] = $image->url;
+        }
+        
+        $image->update($validatedData);
         return new ImageResource($image);
     }
 

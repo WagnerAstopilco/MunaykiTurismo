@@ -44,4 +44,4 @@ Route::apiResource('/promotions', PromotionController::class);
 Route::apiResource('/ratings', RatingController::class);
 Route::apiResource('/reservations', ReservationController::class);
 Route::apiResource('/users', UserController::class);
-Route::apiResource('destinos', DestinoController::class);
+Route::apiResource('/destinos', DestinoController::class);

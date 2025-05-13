@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('place');
             $table->string('country')->unique();
             $table->text('description')->nullable();
-            $table->boolean('visible_in_main_web')->nullable()->default(0);
+            $table->boolean('visible_in_main_web')->nullable()->default(false);
             $table->foreignId('image_id')->nullable()->constrained('images')->onDelete('cascade');
             $table->timestamps();
         });

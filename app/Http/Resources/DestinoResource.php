@@ -19,7 +19,7 @@ class DestinoResource extends JsonResource
             'place' => $this->place,
             'country' => $this->country,
             'description' => $this->description,
-            'visible_in_main_web' => $this->view_in_main_web,
+            'visible_in_main_web' => $this->visible_in_main_web,
             'image_id' => $this->image_id,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,

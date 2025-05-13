@@ -1,49 +1,43 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\Destino;
+use App\Http\Requests\StoreDestinoRequest;
+use App\Http\Requests\UpdateDestinoRequest;
+use App\Http\Resources\DestinoResource;
 use Illuminate\Http\Request;
 
 class DestinoController extends Controller
 {
     public function index()
     {
-        return Destino::all();
+        $destinos = Destino::with('image')->get();
+        return DestinoResource::collection($destinos);
     }
 
-    public function store(Request $request)
+    public function store(StoreDestinoRequest $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
-        ]);
-
-        $destino = Destino::create($request->only('name', 'description'));
-
-        return response()->json($destino, 201);
+        $destino = Destino::create($request->validated());
+        return new DestinoResource($destino);
     }
 
     public function show(Destino $destino)
     {
-        return $destino;
+        $destino->load('image');
+        return new DestinoResource($destino);
     }
 
-    public function update(Request $request, Destino $destino)
+    public function update(UpdateDestinoRequest $request, Destino $destino)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
-        ]);
-
-        $destino->update($request->only('name', 'description'));
-
-        return response()->json($destino);
+        $destino->update($request->validated());
+        return new DestinoResource($destino);
     }
 
+    
     public function destroy(Destino $destino)
     {
         $destino->delete();
-
-        return response()->json(null, 204);
+        return response()->json(['message' => 'Destio eliminada correctamente'], 200);
     }
 }

@@ -22,6 +22,6 @@ class Image extends Model
     }
     public function destino()
     {
-        return $this->belongsTo(Destino::class);
+        return $this->hasOne(Destino::class);
     }
 }
