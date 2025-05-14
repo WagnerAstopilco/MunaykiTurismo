@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\BannerController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\ImageController;
@@ -45,3 +46,6 @@ Route::apiResource('/ratings', RatingController::class);
 Route::apiResource('/reservations', ReservationController::class);
 Route::apiResource('/users', UserController::class);
 Route::apiResource('/destinos', DestinoController::class);
+
+Route::get('/banner', [BannerController::class, 'get']); // cliente y admin
+Route::put('/banner', [BannerController::class, 'update']); // solo admin
