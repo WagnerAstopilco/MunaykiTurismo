@@ -6,6 +6,7 @@ use App\Models\Activity;
 use App\Http\Requests\StoreActivityRequest;
 use App\Http\Requests\UpdateActivityRequest;
 use App\Http\Resources\ActivityResource;
+use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 
 class ActivityController extends Controller
@@ -15,7 +16,7 @@ class ActivityController extends Controller
      */
     public function index()
     {
-        $activities=Activity::with('products')->get();
+        $activities = Activity::with('products')->get();
         return ActivityResource::collection($activities);
     }
 
@@ -24,7 +25,12 @@ class ActivityController extends Controller
      */
     public function store(StoreActivityRequest $request)
     {
-        $activity = Activity::create($request->validated());
+        $validatedData = $request->validated();
+
+        $activity = Activity::create(Arr::except($validatedData, 'product_ids'));
+
+        $activity->products()->attach($validatedData['product_ids']);
+
         return new ActivityResource($activity);
     }
 
@@ -42,7 +48,13 @@ class ActivityController extends Controller
      */
     public function update(UpdateActivityRequest $request, Activity $activity)
     {
-        $activity->update($request->validated());
+
+        $validatedData = $request->validated();
+
+        $activity->update(Arr::except($validatedData, 'product_ids'));
+
+        $activity->products()->syncWithoutDetaching($validatedData['product_ids']);
+
         return new ActivityResource($activity);
     }
 

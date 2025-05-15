@@ -24,6 +24,9 @@ class StoreActivityRequest extends FormRequest
         return [
             'name' => 'required|string|min:3|max:255',
             'description' => 'nullable|string|max:1000',
+
+            'product_ids' => 'nullable|array',
+            'product_ids.*' => 'exists:products,id',
         ];
     }
     public function attributes()

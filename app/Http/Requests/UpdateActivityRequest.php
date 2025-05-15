@@ -24,6 +24,9 @@ class UpdateActivityRequest extends FormRequest
         return [
             'name' => 'sometimes|required|string|min:3|max:255',
             'description' => 'sometimes|nullable|string|max:1000',
+
+            'product_ids' => 'sometimes|nullable|array',
+            'product_ids.*' => 'sometimes|exists:products,id',
         ];
     }
     public function attributes()
