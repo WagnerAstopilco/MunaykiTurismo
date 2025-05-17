@@ -1,0 +1,62 @@
+{
+    "mainCarrusell": [
+        {
+            "name": "slide 1",
+            "image": "\/images\/carrusellMain\/cajamarca.png",
+            "title": "Explora el Norte del Perú con Munayki Travel en Cajamarca",
+            "description": "Vive experiencias auténticas en Baños del Inca, Cumbe Mayo, Ventanillas de Otuzco y más."
+        },
+        {
+            "name": "slide 2",
+            "image": "\/images\/carrusellMain\/huaraz.png",
+            "title": "Explora el Norte del Perú con Munayki Travel en Huaraz",
+            "description": "Vive experiencias auténticas en Huascarán, Chavín de Huantar, Laguna 69 y más."
+        },
+        {
+            "name": "slide 3",
+            "image": "\/images\/carrusellMain\/ica.png",
+            "title": "Explora el Norte del Perú con Munayki Travel en Ica",
+            "description": "Vive experiencias auténticas en Huacachina, Islas Ballestas, Nazca y más."
+        },
+        {
+            "name": "slide 4",
+            "image": "\/images\/carrusellMain\/lambayeque.png",
+            "title": "Explora el Norte del Perú con Munayki Travel en Lambayeque",
+            "description": "Vive experiencias auténticas en Sipán, Túcume, Bosque de Pómac y más."
+        },
+        {
+            "name": "slide 5",
+            "image": "\/images\/carrusellMain\/piura.png",
+            "title": "Explora el Norte del Perú con Munayki Travel en Piura",
+            "description": "Vive experiencias auténticas en Vichayito, Mancora, Los Órganos y más."
+        },
+        {
+            "name": "slide 6",
+            "image": "\/images\/carrusellMain\/tumbes.png",
+            "title": "Explora el Norte del Perú con Munayki Travel en Tumbes",
+            "description": "Vive experiencias auténticas en Punta Sal, Zorritos, Tumbes y más."
+        }
+    ],
+    "specialOffers": [
+        {
+            "name": "card 1",
+            "image": "\/images\/ofertasEspeciales\/huaraz-trujillo.png",
+            "url": "#"
+        },
+        {
+            "name": "card 2",
+            "image": "\/images\/ofertasEspeciales\/ica-paracas-nazca.png",
+            "url": "#"
+        },
+        {
+            "name": "card 3",
+            "image": "\/images\/ofertasEspeciales\/piura-tumbes-guayaquil.png",
+            "url": "#"
+        },
+        {
+            "name": "card 4",
+            "image": "\/images\/ofertasEspeciales\/ica-paracas-nazca.png",
+            "url": "#"
+        }
+    ]
+}

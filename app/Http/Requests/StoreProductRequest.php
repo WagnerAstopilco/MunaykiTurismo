@@ -23,7 +23,7 @@ class StoreProductRequest extends FormRequest
     {
         return [
             'name' => 'required|string|min:3|max:255|unique:products,name',
-            'slug' => 'required|string|min:3|max:255|unique:products,slug|regex:/^[a-z0-9-]+$/',
+            'slug' => 'nullable|string|min:3|max:255|unique:products,slug|regex:/^[a-z0-9-]+$/',
             'description' => 'nullable|string|max:1000',
             'category_id' => 'required|exists:categories,id',
             'price_PEN' => 'required|numeric|gte:0',
@@ -32,12 +32,18 @@ class StoreProductRequest extends FormRequest
             'number_of_days' => 'nullable|integer|min:1',
             'number_of_nights' => 'nullable|integer|min:1',
             'number_of_people' => 'nullable|integer|min:1',
-            'file' => 'nullable|file|mimes:pdf,doc,docx,,xls,xlsx,csv,ppt,pptx,txt,zip',
+            'file' => 'nullable|file|mimes:pdf,doc,docx,xls,xlsx,csv,ppt,pptx,txt,zip|max:10240',
             'itinerary' => 'nullable|string|max:1000',
             'reservation_requirements' => 'nullable|string|max:1000',
             'reservation_included' => 'nullable|string|max:1000',
             'destino_id' => 'required|exists:destinos,id',
             'visible_in_main_web' => 'nullable|boolean',
+
+            'image_ids' => 'nullable|array',
+            'image_ids.*' => 'exists:images,id',
+
+            'activity_ids' => 'nullable|array',
+            'activity_ids.*' => 'exists:activities,id',
         ];
     }
     public function attributes()

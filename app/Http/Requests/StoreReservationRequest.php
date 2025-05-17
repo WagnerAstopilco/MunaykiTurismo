@@ -23,9 +23,10 @@ class StoreReservationRequest extends FormRequest
     {
         return [
             'user_id' => 'required|integer|exists:users,id',
+            'product_id' => 'required|integer|exists:products,id',
             'reservation_date' => 'required|date',
             'number_of_people' => 'required|integer|min:1',
-            'status' => 'required|string|in:pending,confirmed,cancelled',
+            'status' => 'required|string|in:pendiente,pagada,cancelada',
             'total_price' => 'required|numeric|min:0',
             'start_date' => 'required|date',
             'end_date' => 'required|date|after_or_equal:start_date',

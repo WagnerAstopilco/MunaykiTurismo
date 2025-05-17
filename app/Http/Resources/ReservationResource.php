@@ -17,6 +17,7 @@ class ReservationResource extends JsonResource
         return [
             'id'=> $this->id,
             'user_id' => $this->user_id,
+            'product_id' => $this->product_id,
             'reservation_date' => $this->reservation_date,
             'number_of_people' => $this->number_of_people,
             'status' => $this->status,
@@ -28,7 +29,7 @@ class ReservationResource extends JsonResource
             'updated_at' => $this->updated_at,
 
             'user' => new UserResource($this->whenLoaded('user')),
-            'products' => ProductResource::collection($this->whenLoaded('products')),
+            'producto' =>new  ProductResource($this->whenLoaded('producto')),
             'payments' => PaymentResource::collection($this->whenLoaded('payments')),
         ];
     }

@@ -29,6 +29,9 @@ class Product extends Model
         'destino_id',
         'visible_in_main_web',
     ];
+    protected $casts = [
+        'visible_in_main_web' => 'boolean',
+    ];
 
     public function category()
     {
@@ -48,7 +51,7 @@ class Product extends Model
     }
     public function reservations()
     {
-        return $this->belongsToMany(Reservation::class, 'product_reservation');
+        return $this->hasMany(Reservation::class);
     }
     public function promotions()
     {
@@ -62,5 +65,4 @@ class Product extends Model
     {
         return $this->belongsToMany(Coupon::class, 'coupon_product');
     }
-
 }

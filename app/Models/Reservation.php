@@ -13,22 +13,22 @@ class Reservation extends Model
 
     protected $fillable = [
         'user_id',
+        'product_id',
         'reservation_date',
         'number_of_people',
         'status',
         'total_price',
         'start_date',
         'end_date',
-        'payment_id',
     ];
     public function user()
     {
         return $this->belongsTo(User::class);
     }
-    public function products()
-    {
-        return $this->belongsToMany(Product::class, 'product_reservation');
-    }
+    public function producto()
+{
+    return $this->belongsTo(Product::class);
+}
     public function payments()
     {
         return $this->hasMany(Payment::class);

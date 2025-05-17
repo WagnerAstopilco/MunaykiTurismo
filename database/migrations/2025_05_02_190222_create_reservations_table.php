@@ -14,13 +14,13 @@ return new class extends Migration
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('product_id')->constrained('products')->onDelete('cascade');
             $table->date('reservation_date');
             $table->integer('number_of_people');
             $table->enum('status',['pendiente','pagada','cancelada'])->default('pendiente'); 
             $table->decimal('total_price', 10, 2);
             $table->date('start_date');
             $table->date('end_date')->nullable();
-            $table->foreignId('payment_id')->nullable()->constrained('payments')->onDelete('cascade');
             $table->timestamps();
         });
     }

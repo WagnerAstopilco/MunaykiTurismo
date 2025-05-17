@@ -26,7 +26,7 @@ class StoreUserRequest extends FormRequest
             'last_names' => 'required|string|min:5|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
-            'phone' => 'nullable|string|max:15',
+            'phone' => 'nullable|string|max:20',
             'profile_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'role' => 'required|in:cliente,administrador,agente',
             'status' => 'required|in:activo,inactivo',

@@ -23,7 +23,7 @@ class StoreImageRequest extends FormRequest
     {
         return [
             'title' => 'required|string|min:3|max:255',
-            'url' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'url' => 'required|image|mimes:jpeg,png,jpg,gif|max:5120',
         ];
     }
     public function attributes()

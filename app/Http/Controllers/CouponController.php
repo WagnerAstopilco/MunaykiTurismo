@@ -17,7 +17,7 @@ class CouponController extends Controller
      */
     public function index()
     {
-        $coupons = Coupon::with('payments')->get();
+        $coupons = Coupon::with(['payments','products'])->get();
         return CouponResource::collection($coupons);
     }
 

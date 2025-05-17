@@ -23,7 +23,7 @@ class UpdateProductRequest extends FormRequest
     {
         return [
             'name' => 'sometimes|required|string|min:3|max:255|unique:products,name,' . $this->product->id,
-            'slug' => 'sometimes|required|string|min:3|max:255|regex:/^[a-z0-9-]+$/|unique:products,slug,' . $this->product->id,
+            'slug' => 'sometimes|nullable|string|min:3|max:255|regex:/^[a-z0-9\-\/]+$/|unique:products,slug,' .$this->product->id,
             'description' => 'sometimes|nullable|string|max:1000',
             'category_id' => 'sometimes|required|exists:categories,id',
             'price_PEN' => 'sometimes|required|numeric|gte:0',
@@ -32,12 +32,18 @@ class UpdateProductRequest extends FormRequest
             'number_of_days' => 'sometimes|nullable|integer|min:1',
             'number_of_nights' => 'sometimes|nullable|integer|min:1',
             'number_of_people' => 'sometimes|nullable|integer|min:1',
-            'file' => 'sometimes|nullable|file|mimes:pdf,doc,docx,,xls,xlsx,csv,ppt,pptx,txt,zip',
+            'file' => 'sometimes|nullable|file|mimes:pdf,doc,docx,xls,xlsx,csv,ppt,pptx,txt,zip|max:10240',
             'itinerary' => 'sometimes|nullable|string|max:1000',
             'reservation_requirements' => 'sometimes|nullable|string|max:1000',
             'reservation_included' => 'sometimes|nullable|string|max:1000',
             'destino_id' => 'sometimes|required|exists:destinos,id',
             'visible_in_main_web' => 'sometimes|nullable|boolean',
+
+            'image_ids' => 'sometimes|nullable|array',
+            'image_ids.*' => 'sometimes|exists:images,id',
+
+            'activity_ids' => 'sometimes|nullable|array',
+            'activity_ids.*' => 'sometimes|exists:activities,id',
         ];
     }
     public function attributes()

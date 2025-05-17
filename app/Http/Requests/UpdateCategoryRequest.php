@@ -23,7 +23,7 @@ class UpdateCategoryRequest extends FormRequest
     {
         return [
             'name' => 'sometimes|required|string|min:3|max:255|unique:categories,name,' . $this->category->id,
-            'slug' => 'sometimes|required|string|min:3|max:255|regex:/^[a-z0-9-]+$/|unique:categories,slug,' . $this->category->id,
+            'slug' => 'sometimes|nullable|string|min:3|max:255|regex:/^[a-z0-9\-\/]+$/|unique:categories,slug,' . $this->category->id,
             'description' => 'sometimes|nullable|string|max:1000',
             'parent_id' => 'sometimes|nullable|exists:categories,id',
             'visible_in_main_web' => 'sometimes|boolean',

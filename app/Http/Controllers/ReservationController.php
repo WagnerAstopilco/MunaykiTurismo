@@ -15,7 +15,7 @@ class ReservationController extends Controller
      */
     public function index()
     {
-        $reservations = Reservation::with(['user','products','payments'])->get();
+        $reservations = Reservation::with(['user','producto','payments'])->get();
         return ReservationResource::collection($reservations);
     }
 
@@ -33,7 +33,7 @@ class ReservationController extends Controller
      */
     public function show(Reservation $reservation)
     {
-        $reservation->load(['user','products','payments']);
+        $reservation->load(['user','producto','payments']);
         return new ReservationResource($reservation);
     }
 

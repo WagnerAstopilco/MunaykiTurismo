@@ -23,9 +23,10 @@ class UpdateReservationRequest extends FormRequest
     {
         return [
             'user_id' => 'sometimes|required|integer|exists:users,id',
+            'product_id' => 'sometimes|required|integer|exists:products,id',
             'reservation_date' => 'sometimes|required|date',
             'number_of_people' => 'sometimes|required|integer|min:1',
-            'status' => 'sometimes|required|string|in:pending,confirmed,cancelled',
+            'status' => 'sometimes|required|string|in:pendiente,pagada,cancelada',
             'total_price' => 'sometimes|required|numeric|min:0',
             'start_date' => 'sometimes|required|date',
             'end_date' => 'sometimes|required|date|after_or_equal:start_date',

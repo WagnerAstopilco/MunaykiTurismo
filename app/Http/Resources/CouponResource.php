@@ -28,6 +28,7 @@ class CouponResource extends JsonResource
             'updated_at' => $this->updated_at,
 
             'payments' => PaymentResource::collection($this->whenLoaded('Payments')),
+            'products' =>ProductResource::collection($this->whenLoaded('products')),
         ];
     }
 }

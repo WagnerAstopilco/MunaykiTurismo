@@ -3,17 +3,22 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class BannerController extends Controller
 {
+
+    protected $jsonPath = 'data/Banner.json';
+
     public function get()
     {
-        if (!Storage::exists('Banner.json')) {
+        $path = public_path($this->jsonPath);
+
+        if (!File::exists($path)) {
             return response()->json(['error' => 'Archivo no encontrado'], 404);
         }
 
-        $json = Storage::get('Banner.json');
+        $json = File::get($path);
         $data = json_decode($json, true);
 
         return response()->json($data);
@@ -22,8 +27,9 @@ class BannerController extends Controller
     public function update(Request $request)
     {
         $data = $request->all();
+        $path = public_path($this->jsonPath);
 
-        Storage::put('Banner.json', json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+        File::put($path, json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 
         return response()->json(['message' => 'Configuración actualizada correctamente']);
     }

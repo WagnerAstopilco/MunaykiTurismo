@@ -36,8 +36,8 @@ Route::apiResource('/images', ImageController::class);
 Route::apiResource('/payments', PaymentController::class);
 
 Route::apiResource('/productos', ProductController::class);
-Route::post('/productos/{id}/imagenes', [ProductController::class, 'uploadImagenes']);
-Route::post('/productos/{id}/file', [ProductController::class, 'uploadFile']);
+// Route::post('/productos/{id}/imagenes', [ProductController::class, 'uploadImagenes']);
+// Route::post('/productos/{id}/file', [ProductController::class, 'uploadFile']);
 
 
 
@@ -47,5 +47,5 @@ Route::apiResource('/reservations', ReservationController::class);
 Route::apiResource('/users', UserController::class);
 Route::apiResource('/destinos', DestinoController::class);
 
-Route::get('/banner', [BannerController::class, 'get']); // cliente y admin
-Route::put('/banner', [BannerController::class, 'update']); // solo admin
+Route::get('/banner', [BannerController::class, 'get']); 
+Route::put('/banner', [BannerController::class, 'update']);

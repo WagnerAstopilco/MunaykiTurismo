@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Http\Resources\CategoryResource;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -24,7 +25,18 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
-        $category = Category::create($request->validated());
+        $validatedData=$request->validated();
+        if($request->parent_id){
+            $parent=Category::find($validatedData['parent_id']);
+            $slug='/'.Str::slug($parent->name).'/'.Str::slug($validatedData['name']);
+            $validatedData['slug']=$slug;
+        }
+        else{
+            $slug='/'.Str::slug($validatedData['name']);
+            $validatedData['slug']=$slug;
+        }
+
+        $category = Category::create($validatedData);
         return new CategoryResource($category);
     }
 
@@ -42,6 +54,18 @@ class CategoryController extends Controller
      */
     public function update(UpdateCategoryRequest $request, Category $category)
     {
+        $validatedData=$request->validated();
+
+        $nombreCambiado = isset($validatedData['name']) && $validatedData['name'] !== $category->name;
+        $parentCambiado = isset($validatedData['parent_id']) && $validatedData['parent_id'] !== $category->parent_id;
+
+        if ($nombreCambiado || $parentCambiado) {
+            $categoryId = $validatedData['parent_id'] ?? $category->parent_id;
+            $parent = Category::find($categoryId);
+            $nombreProducto = $validatedData['name'] ?? $category->name;
+            $validatedData['slug'] ='/'.Str::slug($parent->slug) . '/' . Str::slug($nombreProducto);
+        }
+
         $category->update($request->validated());
         return new CategoryResource($category);
     }

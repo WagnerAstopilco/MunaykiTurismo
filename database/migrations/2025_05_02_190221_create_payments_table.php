@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');            
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');              
+            $table->foreignId('reservation_id')->nullable()->constrained('reservations')->onDelete('cascade');          
             $table->enum('payment_method', ['tarjeta_credito', 'tarjeta_debito', 'transferencia']);
             $table->string('transaction_id')->nullable();
             $table->enum('status',['pendiente','completada', 'fallida'])->default('pendiente');
