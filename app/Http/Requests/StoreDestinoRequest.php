@@ -23,7 +23,7 @@ class StoreDestinoRequest extends FormRequest
     {
         return [
             'place' => 'required|string|min:3|max:255',
-            'country' => 'required|string|min:3|max:255|unique:destinos,country',
+            'country' => 'required|string|min:3|max:255',
             'description' => 'nullable|string|max:1000',
             'visible_in_main_web' => 'nullable|boolean',
             'image_id' => 'nullable|exists:images,id',

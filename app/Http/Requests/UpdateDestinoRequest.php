@@ -23,7 +23,7 @@ class UpdateDestinoRequest extends FormRequest
     {
         return [
             'place' => 'sometimes|required|string|min:3|max:255',
-            'country' => 'sometimes|required|string|min:3|max:255|unique:destinos,country,' . $this->destino->id,
+            'country' => 'sometimes|required|string|min:3|max:255',
             'description' => 'sometimes|nullable|string|max:1000',
             'visible_in_main_web' => 'sometimes|nullable|boolean',
             'image_id' => 'sometimes|nullable|exists:images,id',
