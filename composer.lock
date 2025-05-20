@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "85309d4524da1baae35ac151622b248f",
+    "content-hash": "3d7489b1d15db03e6455c6baf68d57c3",
     "packages": [
         {
             "name": "brick/math",
@@ -1888,6 +1888,45 @@
                 }
             ],
             "time": "2024-09-21T08:32:55+00:00"
+        },
+        {
+            "name": "mercadopago/dx-php",
+            "version": "3.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mercadopago/sdk-php.git",
+                "reference": "8d4255e6e7cc2b4b3d9c9d75a7f8cebe11670e45"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mercadopago/sdk-php/zipball/8d4255e6e7cc2b4b3d9c9d75a7f8cebe11670e45",
+                "reference": "8d4255e6e7cc2b4b3d9c9d75a7f8cebe11670e45",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.2"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.22",
+                "phpunit/phpunit": "^10.2",
+                "squizlabs/php_codesniffer": "3.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "MercadoPago\\": "src/MercadoPago"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Mercado Pago PHP SDK",
+            "homepage": "https://github.com/mercadopago/sdk-php",
+            "support": {
+                "source": "https://github.com/mercadopago/sdk-php/tree/3.4.0"
+            },
+            "time": "2025-05-15T21:33:26+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -5850,16 +5889,16 @@
         },
         {
             "name": "laravel/pint",
-            "version": "v1.22.0",
+            "version": "v1.22.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/pint.git",
-                "reference": "7ddfaa6523a675fae5c4123ee38fc6bfb8ee4f36"
+                "reference": "941d1927c5ca420c22710e98420287169c7bcaf7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/pint/zipball/7ddfaa6523a675fae5c4123ee38fc6bfb8ee4f36",
-                "reference": "7ddfaa6523a675fae5c4123ee38fc6bfb8ee4f36",
+                "url": "https://api.github.com/repos/laravel/pint/zipball/941d1927c5ca420c22710e98420287169c7bcaf7",
+                "reference": "941d1927c5ca420c22710e98420287169c7bcaf7",
                 "shasum": ""
             },
             "require": {
@@ -5871,11 +5910,11 @@
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^3.75.0",
-                "illuminate/view": "^11.44.2",
-                "larastan/larastan": "^3.3.1",
+                "illuminate/view": "^11.44.7",
+                "larastan/larastan": "^3.4.0",
                 "laravel-zero/framework": "^11.36.1",
                 "mockery/mockery": "^1.6.12",
-                "nunomaduro/termwind": "^2.3",
+                "nunomaduro/termwind": "^2.3.1",
                 "pestphp/pest": "^2.36.0"
             },
             "bin": [
@@ -5912,20 +5951,20 @@
                 "issues": "https://github.com/laravel/pint/issues",
                 "source": "https://github.com/laravel/pint"
             },
-            "time": "2025-04-08T22:11:45+00:00"
+            "time": "2025-05-08T08:38:12+00:00"
         },
         {
             "name": "laravel/sail",
-            "version": "v1.42.0",
+            "version": "v1.43.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/sail.git",
-                "reference": "2edaaf77f3c07a4099965bb3d7dfee16e801c0f6"
+                "reference": "71a509b14b2621ce58574274a74290f933c687f7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/sail/zipball/2edaaf77f3c07a4099965bb3d7dfee16e801c0f6",
-                "reference": "2edaaf77f3c07a4099965bb3d7dfee16e801c0f6",
+                "url": "https://api.github.com/repos/laravel/sail/zipball/71a509b14b2621ce58574274a74290f933c687f7",
+                "reference": "71a509b14b2621ce58574274a74290f933c687f7",
                 "shasum": ""
             },
             "require": {
@@ -5975,7 +6014,7 @@
                 "issues": "https://github.com/laravel/sail/issues",
                 "source": "https://github.com/laravel/sail"
             },
-            "time": "2025-04-29T14:26:46+00:00"
+            "time": "2025-05-13T13:34:34+00:00"
         },
         {
             "name": "mockery/mockery",
@@ -7682,16 +7721,16 @@
         },
         {
             "name": "spatie/backtrace",
-            "version": "1.7.3",
+            "version": "1.7.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/backtrace.git",
-                "reference": "80ae5fabe2a1e3bc7df5c7ca5d91b094dc314b20"
+                "reference": "cd37a49fce7137359ac30ecc44ef3e16404cccbe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/backtrace/zipball/80ae5fabe2a1e3bc7df5c7ca5d91b094dc314b20",
-                "reference": "80ae5fabe2a1e3bc7df5c7ca5d91b094dc314b20",
+                "url": "https://api.github.com/repos/spatie/backtrace/zipball/cd37a49fce7137359ac30ecc44ef3e16404cccbe",
+                "reference": "cd37a49fce7137359ac30ecc44ef3e16404cccbe",
                 "shasum": ""
             },
             "require": {
@@ -7729,7 +7768,7 @@
                 "spatie"
             ],
             "support": {
-                "source": "https://github.com/spatie/backtrace/tree/1.7.3"
+                "source": "https://github.com/spatie/backtrace/tree/1.7.4"
             },
             "funding": [
                 {
@@ -7741,7 +7780,7 @@
                     "type": "other"
                 }
             ],
-            "time": "2025-05-07T07:20:00+00:00"
+            "time": "2025-05-08T15:41:09+00:00"
         },
         {
             "name": "spatie/error-solutions",

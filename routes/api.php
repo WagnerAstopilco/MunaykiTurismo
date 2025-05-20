@@ -14,6 +14,7 @@ use App\Http\Controllers\RatingController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DestinoController;
+use App\Http\Controllers\MercadoPagoController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -39,6 +40,10 @@ Route::apiResource('/productos', ProductController::class);
 // Route::post('/productos/{id}/imagenes', [ProductController::class, 'uploadImagenes']);
 // Route::post('/productos/{id}/file', [ProductController::class, 'uploadFile']);
 
+Route::post('/pago', [MercadoPagoController::class, 'crearPreferencia']);
+Route::options('/{any}', function () {
+    return response()->json([], 204);
+})->where('any', '.*');
 
 
 Route::apiResource('/promotions', PromotionController::class);
