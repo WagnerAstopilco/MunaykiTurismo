@@ -25,6 +25,8 @@ use App\Http\Controllers\MercadoPagoController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::post('/mercadopago/preference', [MercadoPagoController::class, 'createPreference']);
+
 
 Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
@@ -40,7 +42,7 @@ Route::apiResource('/productos', ProductController::class);
 // Route::post('/productos/{id}/imagenes', [ProductController::class, 'uploadImagenes']);
 // Route::post('/productos/{id}/file', [ProductController::class, 'uploadFile']);
 
-Route::post('/pago', [MercadoPagoController::class, 'crearPreferencia']);
+
 Route::options('/{any}', function () {
     return response()->json([], 204);
 })->where('any', '.*');
@@ -52,5 +54,5 @@ Route::apiResource('/reservations', ReservationController::class);
 Route::apiResource('/users', UserController::class);
 Route::apiResource('/destinos', DestinoController::class);
 
-Route::get('/banner', [BannerController::class, 'get']); 
+Route::get('/banner', [BannerController::class, 'get']);
 Route::put('/banner', [BannerController::class, 'update']);

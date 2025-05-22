@@ -22,7 +22,7 @@ class StoreUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'names' => 'required|string|min:5|max:255',
+            'names' => 'required|string|max:255',
             'last_names' => 'required|string|min:5|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
@@ -32,7 +32,7 @@ class StoreUserRequest extends FormRequest
             'status' => 'required|in:activo,inactivo',
         ];
     }
-    
+
     public function attributtes()
     {
         return [

@@ -33,7 +33,7 @@ class StoreProductRequest extends FormRequest
             'number_of_nights' => 'nullable|integer|min:1',
             'number_of_people' => 'nullable|integer|min:1',
             'file' => 'nullable|file|mimes:pdf,doc,docx,xls,xlsx,csv,ppt,pptx,txt,zip|max:10240',
-            'itinerary' => 'nullable|string|max:1000',
+            'itinerary' => 'nullable|string',
             'reservation_requirements' => 'nullable|string|max:1000',
             'reservation_included' => 'nullable|string|max:1000',
             'destino_id' => 'required|exists:destinos,id',

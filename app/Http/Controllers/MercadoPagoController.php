@@ -5,49 +5,51 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use MercadoPago\MercadoPagoConfig;
 use MercadoPago\Client\Preference\PreferenceClient;
-use MercadoPago\Exceptions\MPApiException;
+use MercadoPago\Resources\PreferenceRequest;
+use Illuminate\Support\Facades\Log;
 
 class MercadoPagoController extends Controller
 {
-    public function crearPreferencia(Request $request)
+
+
+    public function createPreference(Request $request)
     {
+        $token = config('services.mercadopago.access_token');
+
+        Log::info('🔐 MercadoPago Access Token usado:', ['token' => $token]);
         try {
-            MercadoPagoConfig::setAccessToken(config('services.mercadopago.access_token'));
-            // Configura el token
+            \MercadoPago\MercadoPagoConfig::setAccessToken(config('services.mercadopago.access_token'));
 
-            // Instancia el cliente de preferencias
-            $client = new PreferenceClient();
+            $client = new \MercadoPago\Client\Preference\PreferenceClient();
 
-            // Define los ítems como array
-            $items = [
-                [
-                    "title" => $request->title,
-                    "quantity" => (int) $request->quantity,
-                    "unit_price" => (float) $request->price
-                ]
-            ];
-
-            // Crea la preferencia
             $preference = $client->create([
-                "items" => $items,
+                "items" => [[
+                    "title" => $request->title ?? 'Tour Genérico',
+                    "quantity" => 1,
+                    "unit_price" => (float) $request->price ?? 1.0,
+                    "currency_id" => "PEN"
+                ]],
                 "back_urls" => [
-                    "success" => "https://d7af-190-43-17-16.ngrok-free.app/success",
-                    // "failure" => "https://d7af-190-43-17-16.ngrok-free.app/failure",
-                    "failure" => "https://localhost:8080/",
-                    "pending" => "https://d7af-190-43-17-16.ngrok-free.app/pending"
+                    "success" => "https://tusitio.com/pago-exitoso",
+                    "failure" => "https://tusitio.com/pago-fallido",
+                    "pending" => "https://tusitio.com/pago-pendiente"
                 ],
                 "auto_return" => "approved"
             ]);
 
-            // Devuelve el link para pagar
-            return response()->json(['init_point' => $preference->init_point]);
-        } catch (MPApiException $e) {
-            // Mostrar mensaje detallado
             return response()->json([
-                'error' => true,
-                'message' => $e->getMessage(),
-                'response' => $e->getResponseBody(),  // aquí está la respuesta detallada de la API
-            ], 400);
+                "id" => $preference->id
+            ]);
+        } catch (\MercadoPago\Exceptions\MPApiException $e) {
+            Log::error('MercadoPago API error', [
+                'status' => $e->getApiResponse()->getStatusCode(),
+                'body' => $e->getApiResponse()->getContent()
+            ]);
+
+            return response()->json([
+                'message' => 'Error al generar preferencia',
+                'error' => $e->getApiResponse()->getContent()
+            ], 500);
         }
     }
 }
