@@ -24,7 +24,7 @@ class StoreCouponRequest extends FormRequest
         return [
             'name' => 'required|string|max:255',
             'code' => 'required|string|min:3|max:255|unique:coupons,code',
-            'description' => 'nullable|string|max:1000',
+            'description' => 'nullable|string',
             'discount_percentage' => 'nullable|numeric|between:0,100',
             'max_uses' => 'nullable|numeric|min:1',
             'uses_count' => 'nullable|numeric|min:0',

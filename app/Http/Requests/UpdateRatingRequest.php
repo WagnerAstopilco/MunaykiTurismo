@@ -25,7 +25,7 @@ class UpdateRatingRequest extends FormRequest
             'user_id' => 'sometimes|required|integer|exists:users,id',
             'product_id' => 'sometimes|required|integer|exists:products,id',
             'value' => 'sometimes|required|integer|between:1,5',
-            'comment' => 'sometimes|nullable|string|max:1000',
+            'comment' => 'sometimes|nullable|string',
         ];
     }
     public function attributes()

@@ -23,7 +23,7 @@ class UpdatePromotionRequest extends FormRequest
     {
         return [
             'name' => 'sometimes|required|string|min:3|max:255',
-            'description' => 'sometimes|nullable|string|max:1000',
+            'description' => 'sometimes|nullable|string',
             'discount_percentage' => 'sometimes|required|integer|between:0,100',
             'valid_from' => 'sometimes|nullable|date',
             'valid_to' => 'sometimes|nullable|date|after_or_equal:valid_from',

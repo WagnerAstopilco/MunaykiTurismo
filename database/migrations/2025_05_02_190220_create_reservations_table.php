@@ -21,6 +21,7 @@ return new class extends Migration
             $table->decimal('total_price', 10, 2);
             $table->date('start_date');
             $table->date('end_date')->nullable();
+            $table->boolean('confirmed')->default(false);
             $table->timestamps();
         });
     }

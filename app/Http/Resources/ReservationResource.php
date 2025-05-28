@@ -27,10 +27,12 @@ class ReservationResource extends JsonResource
             'payment_id' => $this->payment_id,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
+            'confirmed' => $this->confirmed,
 
             'user' => new UserResource($this->whenLoaded('user')),
             'producto' =>new  ProductResource($this->whenLoaded('producto')),
             'payments' => PaymentResource::collection($this->whenLoaded('payments')),
+            'companions' => CompanionResource::collection($this->whenLoaded('companions')),
         ];
     }
 }

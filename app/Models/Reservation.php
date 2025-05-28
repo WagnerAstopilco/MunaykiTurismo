@@ -20,17 +20,22 @@ class Reservation extends Model
         'total_price',
         'start_date',
         'end_date',
+        'confirmed',
     ];
     public function user()
     {
         return $this->belongsTo(User::class);
     }
     public function producto()
-{
-    return $this->belongsTo(Product::class);
-}
+    {
+        return $this->belongsTo(Product::class);
+    }
     public function payments()
     {
         return $this->hasMany(Payment::class);
+    }
+    public function companions()
+    {
+        return $this->hasMany(Companion::class);
     }
 }

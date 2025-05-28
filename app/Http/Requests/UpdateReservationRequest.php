@@ -31,6 +31,14 @@ class UpdateReservationRequest extends FormRequest
             'start_date' => 'sometimes|required|date',
             'end_date' => 'sometimes|required|date|after_or_equal:start_date',
             'payment_id' => 'sometimes|nullable|integer|exists:payments,id',
+            'confirmed' => 'sometimes|nullable|boolean',
+
+            'companions' => 'sometimes|nullable|array',
+            'companions.*.full_name' => 'sometimes|required_with:companions|string|max:255',
+            'companions.*.document_number' => 'sometimes|required_with:companions|string|max:20',
+            'companions.*.age' => 'sometimes|nullable|integer|min:0|max:120',
+            'companions.*.gender' => 'sometimes|nullable|in:male,female,other',
+            'companions.*.is_adult' => 'sometimes|required_with:companions|boolean',
         ];
     }
     public function attributes()

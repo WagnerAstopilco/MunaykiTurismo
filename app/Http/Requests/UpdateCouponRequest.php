@@ -24,7 +24,7 @@ class UpdateCouponRequest extends FormRequest
         return [
             'name' => 'sometimes|required|string|max:255',
             'code' => 'sometimes|required|string|min:3|max:255|unique:coupons,code,'. $this->coupon->id,
-            'description' => 'sometimes|nullable|string|max:1000',
+            'description' => 'sometimes|nullable|string',
             'discount_percentage' => 'sometimes|nullable|numeric|between:0,100',
             'max_uses' => 'sometimes|nullable|numeric|min:1',
             'uses_count' => 'sometimes|nullable|numeric|min:0',
