@@ -30,7 +30,7 @@ class ReservationResource extends JsonResource
             'confirmed' => $this->confirmed,
 
             'user' => new UserResource($this->whenLoaded('user')),
-            'producto' =>new  ProductResource($this->whenLoaded('producto')),
+            'product' =>new  ProductResource($this->whenLoaded('product')),
             'payments' => PaymentResource::collection($this->whenLoaded('payments')),
             'companions' => CompanionResource::collection($this->whenLoaded('companions')),
         ];

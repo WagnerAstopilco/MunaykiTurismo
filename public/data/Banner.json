@@ -2,13 +2,13 @@
     "mainCarrusell": [
         {
             "name": "slide 1",
-            "image": "\/images\/carrusellMain\/cajamarca.png",
             "title": "Explora el Norte del Perú con Munayki Travel en Cajamarca",
-            "description": "Vive experiencias auténticas en Baños del Inca, Cumbe Mayo, Ventanillas de Otuzco y más."
+            "description": "Vive experiencias auténticas en Baños del Inca, Cumbe Mayo, Ventanillas de Otuzco y más.",
+            "image": "imagenes\/qW6VwBaLqBnQHeAQDarRHcGHNkeaV3lWwO9u0xGc.jpg"
         },
         {
             "name": "slide 2",
-            "image": "\/images\/carrusellMain\/huaraz.png",
+            "image": "imagenes\/2z52nTZpO1ji9538DiCoMnQQ2haX3ujQHp3TtzmG.jpg",
             "title": "Explora el Norte del Perú con Munayki Travel en Huaraz",
             "description": "Vive experiencias auténticas en Huascarán, Chavín de Huantar, Laguna 69 y más."
         },
