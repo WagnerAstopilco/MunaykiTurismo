@@ -21,9 +21,10 @@ class UpdateProductRequest extends FormRequest
      */
     public function rules(): array
     {
+        $productId = $this->route('product')?->id;
         return [
-            'name' => 'sometimes|required|string|min:3|max:255|unique:products,name,' . $this->product->id,
-            'slug' => 'sometimes|nullable|string|min:3|max:255|regex:/^[a-z0-9\-\/]+$/|unique:products,slug,' .$this->product->id,
+            'name' => 'sometimes|required|string|min:3|max:255|unique:products,name,' .$productId,
+            'slug' => 'sometimes|nullable|string|min:3|max:255|regex:/^[a-z0-9\-\/]+$/|unique:products,slug,' .$productId,
             'description' => 'sometimes|nullable|string',
             'category_id' => 'sometimes|required|exists:categories,id',
             'price_PEN' => 'sometimes|required|numeric|gte:0',

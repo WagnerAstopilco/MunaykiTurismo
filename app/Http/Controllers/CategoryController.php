@@ -52,23 +52,36 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCategoryRequest $request, Category $category)
-    {
-        $validatedData=$request->validated();
+public function update(UpdateCategoryRequest $request, Category $category)
+{
+    $validatedData = $request->validated();
 
-        $nombreCambiado = isset($validatedData['name']) && $validatedData['name'] !== $category->name;
-        $parentCambiado = isset($validatedData['parent_id']) && $validatedData['parent_id'] !== $category->parent_id;
+    $nombreCambiado = isset($validatedData['name']) && $validatedData['name'] !== $category->name;
+    $parentCambiado = isset($validatedData['parent_id']) && $validatedData['parent_id'] !== $category->parent_id;
 
-        if ($nombreCambiado || $parentCambiado) {
-            $categoryId = $validatedData['parent_id'] ?? $category->parent_id;
-            $parent = Category::find($categoryId);
-            $nombreProducto = $validatedData['name'] ?? $category->name;
-            $validatedData['slug'] ='/'.Str::slug($parent->slug) . '/' . Str::slug($nombreProducto);
+    if ($nombreCambiado || $parentCambiado) {
+        $parentId = $validatedData['parent_id'] ?? $category->parent_id;
+
+        if ($parentId) {
+            $parent = Category::find($parentId);
+            if (!$parent) {
+                return response()->json(['error' => 'La categoría padre especificada no existe.'], 404);
+            }
+            $slugPrefix = '/' . Str::slug($parent->slug);
+        } else {
+            // Si no hay padre, el slug es raíz
+            $slugPrefix = '';
         }
 
-        $category->update($request->validated());
-        return new CategoryResource($category);
+        $nombreCategoria = $validatedData['name'] ?? $category->name;
+        $validatedData['slug'] = $slugPrefix . '/' . Str::slug($nombreCategoria);
     }
+
+    $category->update($validatedData);
+
+    return new CategoryResource($category);
+}
+
 
     /**
      * Remove the specified resource from storage.

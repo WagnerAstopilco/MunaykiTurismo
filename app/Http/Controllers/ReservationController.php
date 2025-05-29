@@ -31,8 +31,7 @@ class ReservationController extends Controller
 
         $reservation = Reservation::create($validatedData);
         foreach ($companions as $companionData) {
-        $reservation->companions()->create($companionData);
-    }
+        $reservation->companions()->create($companionData);}
         return new ReservationResource($reservation);
     }
 

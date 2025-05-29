@@ -38,7 +38,7 @@ Route::apiResource('/coupons', CouponController::class);
 Route::apiResource('/images', ImageController::class);
 Route::apiResource('/payments', PaymentController::class);
 
-Route::apiResource('/productos', ProductController::class);
+Route::apiResource('/products', ProductController::class);
 // Route::post('/productos/{id}/imagenes', [ProductController::class, 'uploadImagenes']);
 // Route::post('/productos/{id}/file', [ProductController::class, 'uploadFile']);
 

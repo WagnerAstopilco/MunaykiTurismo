@@ -37,7 +37,7 @@ class StoreReservationRequest extends FormRequest
             'companions.*.full_name' => 'required_with:companions|string|max:255',
             'companions.*.document_number' => 'required_with:companions|string|max:20',
             'companions.*.age' => 'nullable|integer|min:0|max:120',
-            'companions.*.gender' => 'nullable|in:male,female,other',
+            'companions.*.gender' => 'nullable|in:masculino,fenemino,otro',
             'companions.*.is_adult' => 'required_with:companions|boolean',
         ];
     }

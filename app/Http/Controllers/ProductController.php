@@ -20,7 +20,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::with(['category', 'ratings', 'activities', 'images', 'reservations', 'promotions','destino','coupons'])->get();
+        $products = Product::with(['category', 'ratings', 'activities', 'images', 'reservations', 'promotions', 'destino', 'coupons'])->get();
         return ProductResource::collection($products);
     }
 
@@ -32,13 +32,12 @@ class ProductController extends Controller
         $validatedData = $request->validated();
 
         $category = Category::find($validatedData['category_id']);
-        if($category->parent_id){
+        if ($category->parent_id) {
             $parent = Category::find($category['parent_id']);
-            $slug ='/'. Str::slug($parent->name).'/'.Str::slug($category->name) . '/' . Str::slug($validatedData['name']);
+            $slug = '/' . Str::slug($parent->name) . '/' . Str::slug($category->name) . '/' . Str::slug($validatedData['name']);
             $validatedData['slug'] = $slug;
-        }
-        else{
-            $slug ='/'.Str::slug($category->name) . '/' . Str::slug($validatedData['name']);
+        } else {
+            $slug = '/' . Str::slug($category->name) . '/' . Str::slug($validatedData['name']);
             $validatedData['slug'] = $slug;
         }
 
@@ -64,7 +63,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        $product->load(['category', 'ratings', 'activities', 'images', 'reservations', 'promotions','destino','coupons']);
+        $product->load(['category', 'ratings', 'activities', 'images', 'reservations', 'promotions', 'destino', 'coupons']);
         return new ProductResource($product);
     }
 
@@ -81,10 +80,12 @@ class ProductController extends Controller
         if ($nombreCambiado || $categoriaCambiada) {
             $categoryId = $validatedData['category_id'] ?? $product->category_id;
             $category = Category::find($categoryId);
+            if (!$category) {
+                return response()->json(['error' => 'La categoría especificada no existe.'], 404);
+            }
             $nombreProducto = $validatedData['name'] ?? $product->name;
-            $validatedData['slug'] ='/'.Str::slug($category->slug) . '/' . Str::slug($nombreProducto);
+            $validatedData['slug'] = '/' . Str::slug($category->slug) . '/' . Str::slug($nombreProducto);
         }
-
         if ($request->hasFile('file')) {
             if ($product->file) {
                 Storage::disk('public')->delete($product->file);
@@ -95,11 +96,12 @@ class ProductController extends Controller
             $validatedData['file'] = $product->file;
         }
         $product->update(Arr::except($validatedData, ['image_ids', 'activity_ids']));
+        $product->activities()->syncWithoutDetaching($validatedData['activity_ids'] ?? []);
+        $product->images()->syncWithoutDetaching($validatedData['image_ids'] ?? []);
 
-        $product->activities()->syncWithoutDetaching($validatedData['activity_ids']);
-        $product->images()->syncWithoutDetaching($validatedData['image_ids']);
         return new ProductResource($product);
     }
+
 
     /**
      * Remove the specified resource from storage.

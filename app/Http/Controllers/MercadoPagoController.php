@@ -30,9 +30,9 @@ class MercadoPagoController extends Controller
                     "currency_id" => "PEN"
                 ]],
                 "back_urls" => [
-                    "success" => "https://tusitio.com/pago-exitoso",
-                    "failure" => "https://tusitio.com/pago-fallido",
-                    "pending" => "https://tusitio.com/pago-pendiente"
+                    "success" => "https:// https://e76b-2800-4b0-9202-cbbe-2d6f-216c-84c3-4f5f.ngrok-free.app/pago-exitoso",
+                    "failure" => "https:// https://e76b-2800-4b0-9202-cbbe-2d6f-216c-84c3-4f5f.ngrok-free.app/pago-fallido",
+                    "pending" => "https:// https://e76b-2800-4b0-9202-cbbe-2d6f-216c-84c3-4f5f.ngrok-free.app/pago-pendiente"
                 ],
                 "auto_return" => "approved"
             ]);

@@ -37,7 +37,7 @@ class UpdateReservationRequest extends FormRequest
             'companions.*.full_name' => 'sometimes|required_with:companions|string|max:255',
             'companions.*.document_number' => 'sometimes|required_with:companions|string|max:20',
             'companions.*.age' => 'sometimes|nullable|integer|min:0|max:120',
-            'companions.*.gender' => 'sometimes|nullable|in:male,female,other',
+            'companions.*.gender' => 'sometimes|nullable|in:masculino,fenemino,otro',
             'companions.*.is_adult' => 'sometimes|required_with:companions|boolean',
         ];
     }
